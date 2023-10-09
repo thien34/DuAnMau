@@ -44,10 +44,10 @@ public class StudentDAO implements MethodDAO<Student, String> {
     @Override
     public void update(Student o) {
         JdbcHelper.executeUpdate(UPDATE,
-                o.getId(),
                 o.getIdCourse(),
                 o.getIdLearner(),
-                o.getPoint()
+                o.getPoint(),
+                o.getId()
         );
     }
 

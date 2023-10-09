@@ -12,22 +12,22 @@ public class Welcome extends javax.swing.JDialog {
     }
 
     private void runLoadingBar() {
-    new Thread(() -> {
-        for (int i = 0; i <= 100; i++) {
-            try {
-                Thread.sleep(20);
-                lblLoadingValue.setText(i + "%");
-                progressBar.setValue(i);
-                if (i == 100) {
-                    dispose();
-                    new Home().setVisible(true);
+        new Thread(() -> {
+            for (int i = 0; i <= 100; i++) {
+                try {
+                    Thread.sleep(20);
+                    lblLoadingValue.setText(i + "%");
+                    progressBar.setValue(i);
+                    if (i == 100) {
+                        dispose();
+                        new Home().setVisible(true);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }
-    }).start();
-}
+        }).start();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -147,14 +147,7 @@ public class Welcome extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Welcome dialog = new Welcome();
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new Welcome().setVisible(true);
             }
         });
     }

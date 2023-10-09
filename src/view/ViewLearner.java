@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import service.LearnerService;
+import utils.AuthHelper;
 import utils.MsgHelper;
 
 public class ViewLearner extends javax.swing.JFrame {
@@ -54,7 +55,7 @@ public class ViewLearner extends javax.swing.JFrame {
         return Learner.builder()
                 .id(jTextField1.getText())
                 //                .idEmployee(ShareHelper.USER.getName())
-                .idEmployee("NV1")
+                .idEmployee(AuthHelper.USER.getId())
                 .name(jTextField2.getText())
                 .gender(jComboBox1.getSelectedItem().equals("Nam") ? true : false)
                 .birth(jTextField3.getText())
@@ -517,7 +518,7 @@ public class ViewLearner extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewLearner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {

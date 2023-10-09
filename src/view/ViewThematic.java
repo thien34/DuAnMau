@@ -1,22 +1,27 @@
 package view;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import entity.Thematic;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import service.ThematicService;
 import utils.MsgHelper;
 import utils.ImageHelper;
 
+/*
+* validate
+* 
+ */
 public class ViewThematic extends javax.swing.JFrame {
 
     int index = 0;
@@ -88,12 +93,10 @@ public class ViewThematic extends javax.swing.JFrame {
         jButton8.setEnabled(!insertable && last);
     }
 
-    void selectImage() throws IOException {
+    void selectImage() {
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-//            jLabel4.setIcon(new ImageIcon(file.getAbsolutePath()));
-
             ImageHelper.saveLogo(file);
             ImageIcon icon = ImageHelper.readLogo(file.getName());
             jLabel4.setToolTipText(file.getName());
@@ -466,15 +469,9 @@ public class ViewThematic extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        try {
-            selectImage();
-        } catch (Exception e) {
-        }
+        selectImage();
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -499,9 +496,11 @@ public class ViewThematic extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
