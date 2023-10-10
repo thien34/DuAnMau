@@ -6,6 +6,10 @@ import java.util.List;
 
 public class StudentService implements MethodService<Student, String> {
 
+    public List<Student> getByIDCourse(String id) {
+        return new StudentDAO().getByIDCourse(id);
+    }
+
     @Override
     public List<Student> getAll() {
         return new StudentDAO().getAll();

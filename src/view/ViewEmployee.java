@@ -20,6 +20,7 @@ public class ViewEmployee extends javax.swing.JFrame {
 //         setIconImage(ShareHelper.APP_ICON);
         loadModel(es.getAll());
         this.setStatus(true);
+
     }
 
     void loadModel(List<Employee> list) {
@@ -309,7 +310,6 @@ public class ViewEmployee extends javax.swing.JFrame {
         } catch (Exception e) {
             MsgHelper.alert(this, "Thêm mới thất bại!!!");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -375,7 +375,7 @@ public class ViewEmployee extends javax.swing.JFrame {
             index = jTable1.getSelectedRow();
             Employee employee = es.getAll().get(index);
             setModel(employee);
-            setStatus(false);   
+            setStatus(false);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -438,9 +438,14 @@ public class ViewEmployee extends javax.swing.JFrame {
 
     void setStatus(boolean insertable) {
         jTextField1.setEditable(insertable);
-        jButton1.setEnabled(insertable);
+        if (AuthHelper.USER.getRole()) {
+            jButton1.setEnabled(insertable);
+            jButton3.setEnabled(!insertable);
+        } else {
+            jButton1.setEnabled(false);
+            jButton3.setEnabled(false);
+        }
         jButton2.setEnabled(!insertable);
-        jButton3.setEnabled(!insertable);
         jRadioButton2.setSelected(insertable);
 
         boolean first = this.index > 0;

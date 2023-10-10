@@ -35,9 +35,16 @@ public class LearnerService implements MethodService<Learner, String> {
     public void remove(String id) {
         new LearnerDAO().remove(id);
     }
-    
+
     public List<Learner> search(String n) {
         return new LearnerDAO().search(n);
-    } 
+    }
 
+    public List<Learner> selectNotInCourse(int idCourse) {
+        return new LearnerDAO().selectNotInCourse(idCourse);
+    }
+    
+    public String getNameByID(String id){
+        return new LearnerDAO().getNameByID(id);
+    }
 }

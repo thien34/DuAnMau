@@ -14,6 +14,7 @@ public class ThematicDAO implements MethodDAO<Thematic, String> {
     String INSERT = "Insert Thematic(ID, ThematicName, Tuition, Time, Image, Description) VALUES (?, ?, ?, ?, ?, ?)";
     String UPDATE = "Update Thematic Set ThematicName = ?, Tuition = ?, Time = ?, Image = ?, Description = ? WHERE ID = ?";
     String DELETE = "Delete Thematic WHERE ID = ?";
+    String SEARCH = "Select * From Thematic Where ThematicName = ?";
 
     @Override
     public List<Thematic> getAll() {
@@ -58,28 +59,6 @@ public class ThematicDAO implements MethodDAO<Thematic, String> {
         JdbcHelper.executeUpdate(DELETE, id);
     }
 
-//    public Thematic getByName(String name) {
-//        Thematic thematic = null;
-//        sql = "Select * From Thematic Where ThematicName = ?";
-//        try {
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, name);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                thematic = Thematic.builder()
-//                        .id(rs.getString(1))
-//                        .thematicName(rs.getString(2))
-//                        .tuition(rs.getDouble(3))
-//                        .time(rs.getDouble(4))
-//                        .image(rs.getString(5))
-//                        .description(rs.getString(6))
-//                        .build();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return thematic;
-//    }
     @Override
     public List<Thematic> selectBySQL(String sql, Object... args) {
         List<Thematic> list = new ArrayList<>();
@@ -101,5 +80,14 @@ public class ThematicDAO implements MethodDAO<Thematic, String> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Thematic getByName(String name) {
+
+        List<Thematic> list = this.selectBySQL(SEARCH, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

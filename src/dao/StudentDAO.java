@@ -1,8 +1,6 @@
 package dao;
 
 import entity.Student;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +14,11 @@ public class StudentDAO implements MethodDAO<Student, String> {
     String INSERT = "Insert Student(ID, IDCourse, IDLearner,Point) VALUES (?,?,?,?)";
     String UPDATE = "Update Student Set IDCourse = ?, IDLearner = ?, Point = ? Where ID = ?";
     String DELETE = "Delete Student Where ID = ?";
+    String GET_IDCourse = "Select ID, IDCourse, IDLearner, Point From Student Where IDCourse = ?";
+
+    public List<Student> getByIDCourse(String id) {
+        return selectBySQL(GET_IDCourse, id);
+    }
 
     @Override
     public List<Student> getAll() {

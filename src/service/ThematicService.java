@@ -31,9 +31,9 @@ public class ThematicService implements MethodService<Thematic, String> {
         new ThematicDAO().remove(id);
     }
 
-//    public Thematic getByName(String name) {
-//        return new ThematicDAO().getByName(name);
-//    }
+    public Thematic getByName(String name) {
+        return new ThematicDAO().getByName(name);
+    }
     @Override
     public List<Thematic> selectBySQL(String sql, Object... args) {
         return null;

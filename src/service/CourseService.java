@@ -35,5 +35,12 @@ public class CourseService implements MethodService<Course, String> {
     public void remove(String id) {
         new CourseDAO().remove(id);
     }
-
+    
+    public List<Course> getDemo(String name) {
+        return new CourseDAO().getDemo(name);
+    }
+    
+    public Course getIO(String name, String day) {
+        return new CourseDAO().getIO(name, day);
+    }
 }

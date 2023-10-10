@@ -12,25 +12,6 @@ public class JdbcHelper {
 
     public static String url = "jdbc:sqlserver://" + hostName + ";DatabaseName=" + dbName + ";encrypt=true;trustServerCertificate=true";
 
-//    Connection conn;
-//
-//    public Connection connect() {
-//        try {
-//            conn = DriverManager.getConnection(url, username, password);
-//        } catch (SQLException e) {
-//        }
-//        return conn;
-//    }
-//
-//    public static void main(String[] args) {
-//        JdbcHelper helper = new JdbcHelper();
-//        Connection c = helper.connect();
-//        if (c != null) {
-//            System.out.println("OK");
-//        } else {
-//            System.out.println("KO");
-//        }
-//    }
     public static PreparedStatement preparedStatement(String sql, Object... args) throws SQLException {
         Connection conn = DriverManager.getConnection(url, username, password);
         PreparedStatement ps = null;

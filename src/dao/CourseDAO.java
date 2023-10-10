@@ -17,10 +17,24 @@ public class CourseDAO implements MethodDAO<Course, String> {
     String INSERT = "Insert Course(IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated) VALUES (?, ?, ?, ?, ?, ?, ?)";
     String UPDATE = "Update Course Set IDThematic = ?, OpeningDay = ?, Note = ? Where ID = ?";
     String DELETE = "Delete Course Where ID = ?";
+    String GET_BY_IDT_OD = "Select ID, IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated From Course Where IDThematic = ? AND OpeningDay = ?";
+    String GET_Demo = "Select ID, IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated From Course Where IDThematic = ?";
 
     @Override
     public List<Course> getAll() {
         return selectBySQL(GET_ALL);
+    }
+
+    public Course getIO(String name, String day) {
+        List<Course> list = this.selectBySQL(GET_BY_IDT_OD, name, day);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public List<Course> getDemo(String name) {
+        return selectBySQL(GET_Demo, name);
     }
 
     @Override

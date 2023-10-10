@@ -1,22 +1,26 @@
 package view;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import entity.Course;
 import entity.Student;
 import entity.Thematic;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import service.CourseService;
 import service.LearnerService;
 import service.StudentService;
 import service.ThematicService;
 
-public class HocVien extends javax.swing.JFrame {
+public final class HocVien extends javax.swing.JFrame {
 
     int index = 0;
-    private StudentService ss = new StudentService();
-    private LearnerService ls = new LearnerService();
-    private ThematicService ts = new ThematicService();
-    private CourseService cs = new CourseService();
+    private final StudentService ss = new StudentService();
+    private final LearnerService ls = new LearnerService();
+    private final ThematicService ts = new ThematicService();
+    private final CourseService cs = new CourseService();
 
     private DefaultTableModel model;
 
@@ -24,37 +28,53 @@ public class HocVien extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Quuản lý học viên");
-        loadThematic();
-        loadCoures();
-        loadModel(ss.getAll());
-    }
-
-    void loadModel(List<Student> list) {
-        model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0);
-        list.forEach(o -> {
-            model.addRow(new Object[]{
-                o.getId(),
-                o.getIdLearner(),
-                ls.getByID(o.getIdLearner()),
-                o.getPoint()
-            });
-        }
-        );
+        this.loadThematic();
     }
 
     void loadThematic() {
-        jComboBox1.removeAllItems();
-        for (Thematic o : ts.getAll()) {
-            jComboBox1.addItem(o.getThematicName());
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox1.getModel();
+        model.removeAllElements();
+        List<Thematic> list = ts.getAll();
+        list.forEach(o -> {
+            model.addElement(o.getThematicName());
+        });
+    }
+
+    void loadCoures() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox2.getModel();
+        model.removeAllElements();
+        Thematic cd = ts.getByName((String) jComboBox1.getSelectedItem());
+        if (cd != null) {
+            List<Course> list = cs.getDemo(cd.getId());
+            for (Course o : list) {
+                model.addElement(o.getIdThematic() + " (" + o.getOpeningDay() + ")");
+            }
         }
     }
-    
-    void loadCoures(){
-        jComboBox2.removeAllItems();
-        for (Course o : cs.getAll()) {
-            jComboBox2.addItem(o.getId() + o.getDateCreated());
+
+    void loadModelStudent() {
+        model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        String str = (String) jComboBox2.getSelectedItem();
+        if (str != null) {
+            String[] parts = str.split(" ");
+            Course course = cs.getIO(parts[0], parts[1].substring(1, 11));
+            List<Student> listS = ss.getByIDCourse(course.getId());
+            listS.forEach(o -> {
+                model.addRow(new Object[]{
+                    o.getId(),
+                    o.getIdLearner(),
+                    ls.getNameByID(o.getIdLearner()),
+                    o.getPoint()
+                });
+            });
         }
+    }
+
+    void loadModelLearner() {
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -87,6 +107,16 @@ public class HocVien extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Chuyên Đề"));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -108,6 +138,11 @@ public class HocVien extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Khóa Học"));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -135,7 +170,7 @@ public class HocVien extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -243,10 +278,10 @@ public class HocVien extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(219, 219, 219))
+                .addGap(195, 195, 195))
         );
 
         jTabbedPane1.addTab("Người Học", jPanel2);
@@ -255,9 +290,6 @@ public class HocVien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -267,6 +299,7 @@ public class HocVien extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,6 +325,17 @@ public class HocVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        loadCoures();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        this.loadModelStudent();
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -306,29 +350,20 @@ public class HocVien extends javax.swing.JFrame {
 
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HocVien.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HocVien.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HocVien.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HocVien.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HocVien().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new HocVien().setVisible(true);
         });
     }
 

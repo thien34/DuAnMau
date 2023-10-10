@@ -14,7 +14,6 @@ public class LearnerDAO implements MethodDAO<Learner, String> {
     String INSERT = "INSERT Learner (ID, IDEmployee, Name, Gender, Birth, Phone, Email, Pass, Note, Registration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String UPDATE = "Update Learner Set IDEmployee = ?, Name = ?, Gender = ?, Birth = ?, Phone = ?, Email = ?, Pass = ?, Note = ?, Registration = ? Where ID = ?";
     String DELETE = "Delete Learner Where ID = ?";
-    String SEARCH = "SELECT * FROM Learner WHERE Name LIKE ? Or ID like ? ";
 
     @Override
     public List<Learner> selectBySQL(String sql, Object... args) {
@@ -95,6 +94,21 @@ public class LearnerDAO implements MethodDAO<Learner, String> {
     }
 
     public List<Learner> search(String n) {
+        String SEARCH = "SELECT * FROM Learner WHERE Name LIKE ? Or ID like ? ";
         return selectBySQL(SEARCH, "%" + n + "%", "%" + n + "%");
+    }
+
+    public List<Learner> selectNotInCourse(int idCourse) {
+        String SQL = "SELECT * FROM Learner WHERE ID NOT IN(SELECT IDLearner FROM Student WHERE MaKH = ?)";
+        return this.selectBySQL(SQL, idCourse);
+    }
+    
+    public String getNameByID(String id){
+//        String sql = "SELECT Name FROM Learner WHERE ID = ?";
+        List<Learner> list = this.selectBySQL(GET_BY_ID, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0).getName();
     }
 }
