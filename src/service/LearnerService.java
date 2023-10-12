@@ -40,11 +40,8 @@ public class LearnerService implements MethodService<Learner, String> {
         return new LearnerDAO().search(n);
     }
 
-    public List<Learner> selectNotInCourse(int idCourse) {
-        return new LearnerDAO().selectNotInCourse(idCourse);
+    public List<Learner> selectNotInCourse(String idCourse, String name) {
+        return new LearnerDAO().selectNotInCourse(idCourse, name);
     }
     
-    public String getNameByID(String id){
-        return new LearnerDAO().getNameByID(id);
-    }
 }

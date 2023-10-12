@@ -438,16 +438,10 @@ public class ViewEmployee extends javax.swing.JFrame {
 
     void setStatus(boolean insertable) {
         jTextField1.setEditable(insertable);
-        if (AuthHelper.USER.getRole()) {
-            jButton1.setEnabled(insertable);
-            jButton3.setEnabled(!insertable);
-        } else {
-            jButton1.setEnabled(false);
-            jButton3.setEnabled(false);
-        }
+        jButton1.setEnabled(insertable);
         jButton2.setEnabled(!insertable);
+        jButton3.setEnabled(!insertable);
         jRadioButton2.setSelected(insertable);
-
         boolean first = this.index > 0;
         boolean last = this.index < jTable1.getRowCount() - 1;
         jButton5.setEnabled(!insertable && first);

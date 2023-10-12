@@ -2,6 +2,7 @@ package view;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import entity.Course;
+import entity.Learner;
 import entity.Student;
 import entity.Thematic;
 import java.util.List;
@@ -16,7 +17,7 @@ import service.ThematicService;
 
 public final class HocVien extends javax.swing.JFrame {
 
-    int index = 0;
+    int index = -1;
     private final StudentService ss = new StudentService();
     private final LearnerService ls = new LearnerService();
     private final ThematicService ts = new ThematicService();
@@ -51,29 +52,50 @@ public final class HocVien extends javax.swing.JFrame {
             }
         }
     }
+    int i = 0;
 
     void loadModelStudent() {
         model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
+        i = 1;
         String str = (String) jComboBox2.getSelectedItem();
         if (str != null) {
             String[] parts = str.split(" ");
             Course course = cs.getIO(parts[0], parts[1].substring(1, 11));
-            List<Student> listS = ss.getByIDCourse(course.getId());
-            listS.forEach(o -> {
+            List<Student> list = ss.getByIDCourse(course.getId());
+            list.forEach(o -> {
                 model.addRow(new Object[]{
+                    i++,
                     o.getId(),
                     o.getIdLearner(),
-                    ls.getNameByID(o.getIdLearner()),
+                    ls.getByID(o.getIdLearner()).getName(),
                     o.getPoint()
                 });
             });
         }
+        loadModelLearner();
     }
 
     void loadModelLearner() {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
+        String str = (String) jComboBox2.getSelectedItem();
+        if (str != null) {
+            String[] parts = str.split(" ");
+            Course course = cs.getIO(parts[0], parts[1].substring(1, 11));
+            String name = jTextField1.getText();
+            List<Learner> list = ls.selectNotInCourse(course.getId(), name);
+            list.forEach(o -> {
+                model.addRow(new Object[]{
+                    o.getId(),
+                    o.getName(),
+                    o.getGender(),
+                    o.getBirth(),
+                    o.getPhone(),
+                    o.getEmail()
+                });
+            });
+        }
 
     }
 
@@ -166,11 +188,11 @@ public final class HocVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã HV", "Mã NH", "Họ tên", "Điểm"
+                "STT", "Mã HV", "Mã NH", "Họ tên", "Điểm"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

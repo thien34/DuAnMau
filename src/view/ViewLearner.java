@@ -54,7 +54,6 @@ public class ViewLearner extends javax.swing.JFrame {
     Learner getModel() {
         return Learner.builder()
                 .id(jTextField1.getText())
-                //                .idEmployee(ShareHelper.USER.getName())
                 .idEmployee(AuthHelper.USER.getId())
                 .name(jTextField2.getText())
                 .gender(jComboBox1.getSelectedItem().equals("Nam") ? true : false)
