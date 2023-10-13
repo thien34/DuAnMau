@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
 
-public class StudentDAO implements MethodDAO<Student, String> {
+public class StudentDAO implements MethodDAO<Student> {
 
-    String GET_ALL = "Select ID, IDCourse, IDLearner, Point From Student";
-    String GET_BY_ID = "Select ID, IDCourse, IDLearner, Point From Student Where ID = ?";
-    String INSERT = "Insert Student(ID, IDCourse, IDLearner,Point) VALUES (?,?,?,?)";
+    String GET_ALL = "Select * From Student";
+    String GET_BY_ID = "Select * From Student Where ID = ?";
+    String INSERT = "Insert Student(IDCourse, IDLearner,Point) VALUES (?,?,?)";
     String UPDATE = "Update Student Set IDCourse = ?, IDLearner = ?, Point = ? Where ID = ?";
     String DELETE = "Delete Student Where ID = ?";
-    String GET_IDCourse = "Select ID, IDCourse, IDLearner, Point From Student Where IDCourse = ?";
+    String GET_IDCourse = "Select * From Student Where IDCourse = ?";
 
     public List<Student> getByIDCourse(String id) {
         return selectBySQL(GET_IDCourse, id);
@@ -37,7 +37,6 @@ public class StudentDAO implements MethodDAO<Student, String> {
     @Override
     public void add(Student o) {
         JdbcHelper.executeUpdate(INSERT,
-                o.getId(),
                 o.getIdCourse(),
                 o.getIdLearner(),
                 o.getPoint()

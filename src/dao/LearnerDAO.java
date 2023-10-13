@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
 
-public class LearnerDAO implements MethodDAO<Learner, String> {
+public class LearnerDAO implements MethodDAO<Learner> {
 
-    String GET_ALL = "Select ID, IDEmployee, Name, Gender, Birth, Phone, Email, Pass, Note, Registration From Learner";
+    String GET_ALL = "Select * From Learner";
     String GET_BY_ID = "Select * From Learner Where ID = ?";
-    String INSERT = "INSERT Learner (ID, IDEmployee, Name, Gender, Birth, Phone, Email, Pass, Note, Registration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    String UPDATE = "Update Learner Set IDEmployee = ?, Name = ?, Gender = ?, Birth = ?, Phone = ?, Email = ?, Pass = ?, Note = ?, Registration = ? Where ID = ?";
+    String INSERT = "INSERT Learner (ID, IDEmployee, Name, Gender, Birth, Phone, Email, Note, Registration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String UPDATE = "Update Learner Set IDEmployee = ?, Name = ?, Gender = ?, Birth = ?, Phone = ?, Email = ?, Note = ?, Registration = ? Where ID = ?";
     String DELETE = "Delete Learner Where ID = ?";
 
     @Override

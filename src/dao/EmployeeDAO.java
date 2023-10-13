@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
 
-public class EmployeeDAO implements MethodDAO<Employee, String> {
+public class EmployeeDAO implements MethodDAO<Employee> {
 
     String GET_ALL = "Select * From Employee";
     String GET_BY_ID = "Select * From Employee Where ID = ?";
     String INSERT = "Insert Employee(ID, Pass, Name, Role) VALUES (?, ?, ?, ?)";
     String UPDATE = "Update Employee Set Pass= ?, Name= ?, Role= ? Where ID = ?";
     String DELETE = "Delete Employee Where ID = ?";
-
+ 
     @Override
     public List<Employee> getAll() {
         return selectBySQL(GET_ALL);

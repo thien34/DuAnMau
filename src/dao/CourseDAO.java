@@ -2,23 +2,21 @@ package dao;
 
 import entity.Course;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import utils.JdbcHelper;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CourseDAO implements MethodDAO<Course> {
 
-public class CourseDAO implements MethodDAO<Course, String> {
-
-    String GET_ALL = "Select ID, IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated From Course";
-    String GET_BY_ID = "Select ID, IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated From Course Where ID = ?";
+    String GET_ALL = "Select * From Course";
+    String GET_BY_ID = "Select * From Course Where ID = ?";
     String INSERT = "Insert Course(IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated) VALUES (?, ?, ?, ?, ?, ?, ?)";
     String UPDATE = "Update Course Set IDThematic = ?, OpeningDay = ?, Note = ? Where ID = ?";
     String DELETE = "Delete Course Where ID = ?";
-    String GET_BY_IDT_OD = "Select ID, IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated From Course Where IDThematic = ? AND OpeningDay = ?";
-    String GET_Demo = "Select ID, IDThematic, IDEmployee, Tuition, Time, OpeningDay, Note, DateCreated From Course Where IDThematic = ?";
+
+    String GET_BY_IDT_OD = "Select * From Course Where IDThematic = ? AND OpeningDay = ?";
+    String GET_Demo = "Select * From Course Where IDThematic = ?";
 
     @Override
     public List<Course> getAll() {
@@ -94,7 +92,7 @@ public class CourseDAO implements MethodDAO<Course, String> {
             }
             rs.getStatement().getConnection().close();
             return list;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

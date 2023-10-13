@@ -2,18 +2,18 @@ package service;
 
 import java.util.List;
 
-public interface MethodService<EntityType, KeyType> {
+public interface MethodService<EntityType> {
 
     List<EntityType> selectBySQL(String sql, Object... args);
 
     List<EntityType> getAll();
 
-    EntityType getByID(KeyType id);
+    EntityType getByID(String id);
 
     void add(EntityType o);
 
     void update(EntityType o);
 
-    void remove(KeyType id);
+    void remove(String id);
 
 }

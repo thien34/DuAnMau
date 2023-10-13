@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
 
-public class ThematicDAO implements MethodDAO<Thematic, String> {
+public class ThematicDAO implements MethodDAO<Thematic> {
 
     String GET_ALL = "Select * From Thematic";
     String GET_BY_ID = "Select * From Thematic Where ID = ?";

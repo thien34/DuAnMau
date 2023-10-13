@@ -4,7 +4,7 @@ import dao.CourseDAO;
 import entity.Course;
 import java.util.List;
 
-public class CourseService implements MethodService<Course, String> {
+public class CourseService implements MethodService<Course> {
 
     @Override
     public List<Course> selectBySQL(String sql, Object... args) {
@@ -35,11 +35,11 @@ public class CourseService implements MethodService<Course, String> {
     public void remove(String id) {
         new CourseDAO().remove(id);
     }
-    
+
     public List<Course> getDemo(String name) {
         return new CourseDAO().getDemo(name);
     }
-    
+
     public Course getIO(String name, String day) {
         return new CourseDAO().getIO(name, day);
     }

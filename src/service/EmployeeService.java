@@ -4,7 +4,7 @@ import dao.EmployeeDAO;
 import entity.Employee;
 import java.util.List;
 
-public class EmployeeService implements MethodService<Employee, String> {
+public class EmployeeService implements MethodService<Employee> {
 
     @Override
     public List<Employee> selectBySQL(String sql, Object... args) {

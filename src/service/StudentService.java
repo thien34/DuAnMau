@@ -4,7 +4,7 @@ import dao.StudentDAO;
 import entity.Student;
 import java.util.List;
 
-public class StudentService implements MethodService<Student, String> {
+public class StudentService implements MethodService<Student> {
 
     public List<Student> getByIDCourse(String id) {
         return new StudentDAO().getByIDCourse(id);

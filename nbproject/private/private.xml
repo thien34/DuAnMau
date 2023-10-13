@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/view/ViewEmployee.java</file>
-            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/dao/CourseDAO.java</file>
-            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/view/HocVien.java</file>
-            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/service/CourseService.java</file>
-            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/view/Home.java</file>
+            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/dao/ThongKeDAO.java</file>
+            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/view/TongHop.java</file>
+            <file>file:/D:/FPT-Polytechnic/semesters-4/du-an-mau/DuAnMau/src/view/ViewStudent.java</file>
         </group>
     </open-files>
 </project-private>

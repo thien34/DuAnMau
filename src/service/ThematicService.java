@@ -4,7 +4,7 @@ import dao.ThematicDAO;
 import entity.Thematic;
 import java.util.List;
 
-public class ThematicService implements MethodService<Thematic, String> {
+public class ThematicService implements MethodService<Thematic> {
 
     @Override
     public List<Thematic> getAll() {
@@ -34,6 +34,7 @@ public class ThematicService implements MethodService<Thematic, String> {
     public Thematic getByName(String name) {
         return new ThematicDAO().getByName(name);
     }
+
     @Override
     public List<Thematic> selectBySQL(String sql, Object... args) {
         return null;

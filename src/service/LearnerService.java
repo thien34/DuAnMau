@@ -4,7 +4,7 @@ import dao.LearnerDAO;
 import entity.Learner;
 import java.util.List;
 
-public class LearnerService implements MethodService<Learner, String> {
+public class LearnerService implements MethodService<Learner> {
 
     @Override
     public List<Learner> selectBySQL(String sql, Object... args) {
@@ -43,5 +43,5 @@ public class LearnerService implements MethodService<Learner, String> {
     public List<Learner> selectNotInCourse(String idCourse, String name) {
         return new LearnerDAO().selectNotInCourse(idCourse, name);
     }
-    
+
 }

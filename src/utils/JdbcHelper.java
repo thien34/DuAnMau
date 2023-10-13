@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class JdbcHelper {
 
-    private static String hostName = "localhost:1433";
-    public static String dbName = "DAM";
+    public static String hostName = "localhost:1433";
+    public static String dbName = "PTPM_FINALLY_JAVA_SOF2041";
 
     public static String username = "sa";
     public static String password = "123456";
@@ -14,7 +14,7 @@ public class JdbcHelper {
 
     public static PreparedStatement preparedStatement(String sql, Object... args) throws SQLException {
         Connection conn = DriverManager.getConnection(url, username, password);
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         if (sql.trim().startsWith("{")) {
             ps = conn.prepareCall(sql);
         } else {
