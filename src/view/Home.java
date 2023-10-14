@@ -7,7 +7,7 @@ import utils.AuthHelper;
 import utils.MsgHelper;
 
 public final class Home extends javax.swing.JFrame {
-
+    
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
@@ -15,7 +15,7 @@ public final class Home extends javax.swing.JFrame {
         startClock();
         displayUserInfo();
     }
-
+    
     void startClock() {
         new Thread(() -> {
             while (true) {
@@ -23,25 +23,40 @@ public final class Home extends javax.swing.JFrame {
             }
         }).start();
     }
-
+    
     void displayUserInfo() {
         String userID = AuthHelper.USER.getId();
         String role = AuthHelper.USER.getRole() ? "Manager" : "Employee";
         jLabel1.setText("UserID: " + userID + " |  Role: " + role);
     }
-
+    
     void LogOut() {
         AuthHelper.logout();
         this.dispose();
         new Login().setVisible(true);
     }
-
+    
     void Exit() {
         if (MsgHelper.confirm(this, "Do you want to end this session?")) {
             System.exit(0);
         }
     }
-
+    
+    void openStatistics(int index) {
+        if (AuthHelper.isLogin()) {
+            if (index == 3 && !AuthHelper.USER.getRole()) {
+                MsgHelper.alert(this, "You're not authorized to view revenue tab!");
+            } else {
+                ViewStatistics statisticJDialog = new ViewStatistics();
+                statisticJDialog.selectTab(index);
+                statisticJDialog.setVisible(true);
+                statisticJDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        } else {
+            MsgHelper.alert(this, "Please login!");
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -303,20 +318,40 @@ public final class Home extends javax.swing.JFrame {
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Clien list.png"))); // NOI18N
         jMenuItem9.setText("Người Học Từng Năm");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
         jMenu3.add(jSeparator5);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Card file.png"))); // NOI18N
         jMenuItem10.setText("Bảng Điểm Khóa...");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem10);
 
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Bar chart.png"))); // NOI18N
         jMenuItem11.setText("Điểm Từng Khóa Học");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem11);
         jMenu3.add(jSeparator6);
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Dollar.png"))); // NOI18N
         jMenuItem12.setText("Doanh Thu Từng Chuyên Đề...");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem12);
 
         jMenuBar1.add(jMenu3);
@@ -459,6 +494,22 @@ public final class Home extends javax.swing.JFrame {
         aja.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        openStatistics(0);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        openStatistics(1);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        openStatistics(2);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        openStatistics(3);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

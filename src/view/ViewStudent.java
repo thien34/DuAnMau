@@ -434,7 +434,7 @@ public final class ViewStudent extends javax.swing.JFrame {
         for (int o : rows) {
             String learnerID = (String) jTable1.getValueAt(o, 0);
             Student student = Student.builder().idCourse(returnCom2().getId())
-                    .idLearner(learnerID).point(0.0).build();
+                    .idLearner(learnerID).point(-1.0).build();
             ss.add(student);
         }
         this.loadModelStudent();
