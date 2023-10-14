@@ -23,7 +23,7 @@ public final class ViewStudent extends javax.swing.JFrame {
     private final LearnerService ls = new LearnerService();
     private final ThematicService ts = new ThematicService();
     private final CourseService cs = new CourseService();
-
+    List<Student> list;
     private DefaultTableModel model;
 
     public ViewStudent() {
@@ -65,17 +65,13 @@ public final class ViewStudent extends javax.swing.JFrame {
         return null;
     }
 
-    int i = 0;
-
     void loadModelStudent() {
         model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
-        i = 1;
         if (returnCom2() != null) {
-            List<Student> list = ss.getByIDCourse(returnCom2().getId());
+            list = ss.getByIDCourse(returnCom2().getId());
             list.forEach(o -> {
                 model.addRow(new Object[]{
-                    i++,
                     o.getId(),
                     o.getIdLearner(),
                     ls.getByID(o.getIdLearner()).getName(),
@@ -92,15 +88,15 @@ public final class ViewStudent extends javax.swing.JFrame {
         model.setRowCount(0);
         if (returnCom2() != null) {
             String name = jTextField1.getText();
-            List<Learner> list = ls.selectNotInCourse(returnCom2().getId(), name);
-            list.forEach(o -> {
+            List<Learner> listL = ls.selectNotInCourse(returnCom2().getId(), name);
+            listL.forEach(o -> {
                 model.addRow(new Object[]{
                     o.getId(),
                     o.getName(),
-                    o.getGender(),
+                    o.getGender() ? "Nam" : "Nữ",
                     o.getBirth(),
                     o.getPhone(),
-                    o.getEmail()    
+                    o.getEmail()
                 });
             });
         }
@@ -206,12 +202,19 @@ public final class ViewStudent extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã HV", "Mã NH", "Họ tên", "Điểm"
+                "Mã HV", "Mã NH", "Họ tên", "Điểm"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -219,11 +222,10 @@ public final class ViewStudent extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(40);
             jTable2.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(40);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(130);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(55);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(130);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(55);
         }
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -389,10 +391,10 @@ public final class ViewStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int n = jTable1.getRowCount();
+        int n = list.size();
         for (int row = 0; row < n; row++) {
-            int studentID = (Integer) jTable1.getValueAt(row, 1);
-            double diem = (Double) jTable1.getValueAt(row, 4);
+            int studentID = (int) jTable2.getValueAt(row, 0);
+            double diem = (double) jTable2.getValueAt(row, 3);
             Student student = ss.getByID(String.valueOf(studentID));
             student.setPoint(diem);
             ss.update(student);
@@ -408,7 +410,7 @@ public final class ViewStudent extends javax.swing.JFrame {
         int[] rows = jTable2.getSelectedRows();
         if (rows.length > 0 && MsgHelper.confirm(this, "Do you want to delete student?")) {
             for (int row : rows) {
-                int id = (Integer) jTable2.getValueAt(row, 1);
+                int id = (Integer) jTable2.getValueAt(row, 0);
                 ss.remove(String.valueOf(id));
             }
             this.loadModelStudent();
@@ -428,8 +430,7 @@ public final class ViewStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int rows[] = jTable1.getSelectedColumns();
-
+        int rows[] = jTable1.getSelectedRows();
         for (int o : rows) {
             String learnerID = (String) jTable1.getValueAt(o, 0);
             Student student = Student.builder().idCourse(returnCom2().getId())

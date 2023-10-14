@@ -15,15 +15,13 @@ public class CourseDAO implements MethodDAO<Course> {
     String UPDATE = "Update Course Set IDThematic = ?, OpeningDay = ?, Note = ? Where ID = ?";
     String DELETE = "Delete Course Where ID = ?";
 
-    String GET_BY_IDT_OD = "Select * From Course Where IDThematic = ? AND OpeningDay = ?";
-    String GET_Demo = "Select * From Course Where IDThematic = ?";
-
     @Override
     public List<Course> getAll() {
         return selectBySQL(GET_ALL);
     }
 
     public Course getIO(String name, String day) {
+        String GET_BY_IDT_OD = "Select * From Course Where IDThematic = ? AND OpeningDay = ?";
         List<Course> list = this.selectBySQL(GET_BY_IDT_OD, name, day);
         if (list.isEmpty()) {
             return null;
@@ -32,7 +30,23 @@ public class CourseDAO implements MethodDAO<Course> {
     }
 
     public List<Course> getDemo(String name) {
+        String GET_Demo = "Select * From Course Where IDThematic = ?";
         return selectBySQL(GET_Demo, name);
+    }
+
+    public List<Integer> getYears() {
+        String SQL = "SELECT DISTINCT YEAR(OpeningDay) Year FROM Course ORDER BY Year DESC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.executeQuery(SQL);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -45,7 +59,8 @@ public class CourseDAO implements MethodDAO<Course> {
     }
 
     @Override
-    public void add(Course o) {
+    public void add(Course o
+    ) {
         JdbcHelper.executeUpdate(INSERT,
                 o.getIdThematic(),
                 o.getIdEmployee(),
@@ -58,7 +73,8 @@ public class CourseDAO implements MethodDAO<Course> {
     }
 
     @Override
-    public void update(Course o) {
+    public void update(Course o
+    ) {
         JdbcHelper.executeUpdate(UPDATE,
                 o.getIdThematic(),
                 o.getOpeningDay(),
@@ -68,12 +84,14 @@ public class CourseDAO implements MethodDAO<Course> {
     }
 
     @Override
-    public void remove(String id) {
+    public void remove(String id
+    ) {
         JdbcHelper.executeUpdate(DELETE, id);
     }
 
     @Override
-    public List<Course> selectBySQL(String sql, Object... args) {
+    public List<Course> selectBySQL(String sql, Object... args
+    ) {
         List<Course> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);

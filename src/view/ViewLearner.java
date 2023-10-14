@@ -16,7 +16,6 @@ public final class ViewLearner extends javax.swing.JFrame {
     private int index = 0;
     private final LearnerService ls = new LearnerService();
 
-    
     public ViewLearner() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -59,11 +58,10 @@ public final class ViewLearner extends javax.swing.JFrame {
                 .id(jTextField1.getText())
                 .idEmployee(AuthHelper.USER.getId())
                 .name(jTextField2.getText())
-                .gender(jComboBox1.getSelectedItem().equals("Nam") ? true : false)
+                .gender(jComboBox1.getSelectedItem().equals("Nam"))
                 .birth(jTextField3.getText())
                 .phone(jTextField4.getText())
                 .email(jTextField5.getText())
-                .pass("1")
                 .note(jTextArea1.getText())
                 .registration(LocalDate.now().toString())
                 .build();
@@ -560,9 +558,8 @@ public final class ViewLearner extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewLearner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        //</editor-fold>
 
+        //</editor-fold>
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (UnsupportedLookAndFeelException ex) {

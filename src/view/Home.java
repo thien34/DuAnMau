@@ -2,11 +2,12 @@ package view;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JFrame;
 import utils.AuthHelper;
 import utils.MsgHelper;
 
-public class Home extends javax.swing.JFrame {
-    
+public final class Home extends javax.swing.JFrame {
+
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
@@ -14,7 +15,7 @@ public class Home extends javax.swing.JFrame {
         startClock();
         displayUserInfo();
     }
-    
+
     void startClock() {
         new Thread(() -> {
             while (true) {
@@ -22,25 +23,25 @@ public class Home extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     void displayUserInfo() {
         String userID = AuthHelper.USER.getId();
         String role = AuthHelper.USER.getRole() ? "Manager" : "Employee";
         jLabel1.setText("UserID: " + userID + " |  Role: " + role);
     }
-    
+
     void LogOut() {
         AuthHelper.logout();
         this.dispose();
         new Login().setVisible(true);
     }
-    
+
     void Exit() {
         if (MsgHelper.confirm(this, "Do you want to end this session?")) {
             System.exit(0);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -399,45 +400,65 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new ViewThematic().setVisible(true);
+        ViewThematic vt = new ViewThematic();
+        vt.setVisible(true);
+        vt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new ViewLearner().setVisible(true);
+        ViewLearner vl = new ViewLearner();
+        vl.setVisible(true);
+        vl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new ViewCourse().setVisible(true);
+        ViewCourse vc = new ViewCourse();
+        vc.setVisible(true);
+        vc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        new ViewStudent().setVisible(true);
+        ViewStudent vs = new ViewStudent();
+        vs.setVisible(true);
+        vs.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new ViewThematic().setVisible(true);
+        ViewThematic vt = new ViewThematic();
+        vt.setVisible(true);
+        vt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new ViewLearner().setVisible(true);
+        ViewLearner vl = new ViewLearner();
+        vl.setVisible(true);
+        vl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        new ViewCourse().setVisible(true);
+        ViewCourse vc = new ViewCourse();
+        vc.setVisible(true);
+        vc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new ViewStudent().setVisible(true);
+        ViewStudent vs = new ViewStudent();
+        vs.setVisible(true);
+        vs.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new ViewEmployee().setVisible(true);
+        ViewEmployee ve = new ViewEmployee();
+        ve.setVisible(true);
+        ve.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        new AboutJApp().setVisible(true);
+        AboutJApp aja = new AboutJApp();
+        aja.setVisible(true);
+        aja.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

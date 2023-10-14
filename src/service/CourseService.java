@@ -43,4 +43,8 @@ public class CourseService implements MethodService<Course> {
     public Course getIO(String name, String day) {
         return new CourseDAO().getIO(name, day);
     }
+
+    public List<Integer> getYears() {
+        return new CourseDAO().getYears();
+    }
 }

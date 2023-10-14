@@ -29,9 +29,8 @@ public class LearnerDAO implements MethodDAO<Learner> {
                         .birth(rs.getString(5))
                         .phone(rs.getString(6))
                         .email(rs.getString(7))
-                        .pass(rs.getString(8))
-                        .note(rs.getString(9))
-                        .registration(rs.getString(10))
+                        .note(rs.getString(8))
+                        .registration(rs.getString(9))
                         .build();
                 list.add(learner);
             }
@@ -66,7 +65,6 @@ public class LearnerDAO implements MethodDAO<Learner> {
                 o.getBirth(),
                 o.getPhone(),
                 o.getEmail(),
-                o.getPass(),
                 o.getNote(),
                 o.getRegistration()
         );
@@ -81,7 +79,6 @@ public class LearnerDAO implements MethodDAO<Learner> {
                 o.getBirth(),
                 o.getPhone(),
                 o.getEmail(),
-                o.getPass(),
                 o.getNote(),
                 o.getRegistration(),
                 o.getId()

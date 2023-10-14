@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import entity.Employee;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import service.EmployeeService;
 import utils.AuthHelper;
 import utils.MsgHelper;
@@ -78,7 +79,7 @@ public class Login extends javax.swing.JDialog {
 
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtUser.setText("NV1");
+        txtUser.setText("E01");
         txtUser.setToolTipText("");
         txtUser.setBorder(null);
         txtUser.addActionListener(new java.awt.event.ActionListener() {
@@ -296,14 +297,12 @@ public class Login extends javax.swing.JDialog {
         //</editor-fold>
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             System.err.println("Failed to initialize LaF");
         }
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

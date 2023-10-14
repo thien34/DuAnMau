@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import service.CourseService;
 import service.EmployeeService;
 import service.ThematicService;
+import utils.AuthHelper;
 import utils.MsgHelper;
 
 public final class ViewCourse extends javax.swing.JFrame {
@@ -77,8 +78,8 @@ public final class ViewCourse extends javax.swing.JFrame {
 
     Course getModel() {
         return Course.builder()
-                .idThematic(ts.getAll().get(jComboBox2.getSelectedIndex()).getId())
-                .idEmployee("NV2")
+                .idThematic(ts.getByName((String) jComboBox2.getSelectedItem()).getId())
+                .idEmployee(AuthHelper.USER.getId())
                 .tuition(Double.valueOf(jTextField2.getText()))
                 .time(Double.valueOf(jTextField8.getText()))
                 .openingDay(jTextField7.getText())

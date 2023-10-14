@@ -163,7 +163,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtUser">
           <Properties>
-            <Property name="text" type="java.lang.String" value="NV1"/>
+            <Property name="text" type="java.lang.String" value="E01"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
