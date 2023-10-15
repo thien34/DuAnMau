@@ -495,24 +495,28 @@ public final class ViewLearner extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         index = 0;
         setModel(ls.getAll().get(index));
+        jTable1.setRowSelectionInterval(index, index);
         setStatus(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         index = jTable1.getRowCount() - 1;
         setModel(ls.getAll().get(index));
+        jTable1.setRowSelectionInterval(index, index);
         setStatus(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         index--;
         setModel(ls.getAll().get(index));
+        jTable1.setRowSelectionInterval(index, index);
         setStatus(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         index++;
         setModel(ls.getAll().get(index));
+        jTable1.setRowSelectionInterval(index, index);
         setStatus(false);
     }//GEN-LAST:event_jButton7ActionPerformed
 

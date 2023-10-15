@@ -1,21 +1,27 @@
 package view;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import utils.AuthHelper;
+import utils.ImageHelper;
 import utils.MsgHelper;
 
 public final class Home extends javax.swing.JFrame {
-    
+
     public Home() {
         initComponents();
-        setLocationRelativeTo(null);
+        FlatLightLaf.isLafDark();
         setTitle("Home - EDUSYS");
+        setIconImage(ImageHelper.logoApp());
+        setLocationRelativeTo(null);
         startClock();
         displayUserInfo();
     }
-    
+
     void startClock() {
         new Thread(() -> {
             while (true) {
@@ -23,25 +29,25 @@ public final class Home extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     void displayUserInfo() {
         String userID = AuthHelper.USER.getId();
         String role = AuthHelper.USER.getRole() ? "Manager" : "Employee";
         jLabel1.setText("UserID: " + userID + " |  Role: " + role);
     }
-    
+
     void LogOut() {
         AuthHelper.logout();
         this.dispose();
         new Login().setVisible(true);
     }
-    
+
     void Exit() {
         if (MsgHelper.confirm(this, "Do you want to end this session?")) {
             System.exit(0);
         }
     }
-    
+
     void openStatistics(int index) {
         if (AuthHelper.isLogin()) {
             if (index == 3 && !AuthHelper.USER.getRole()) {
@@ -56,7 +62,7 @@ public final class Home extends javax.swing.JFrame {
             MsgHelper.alert(this, "Please login!");
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -194,7 +200,6 @@ public final class Home extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Info.png"))); // NOI18N
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Alarm.png"))); // NOI18N
-        jLabel2.setText("Đồng Hồ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -221,14 +226,15 @@ public final class Home extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/FPT_Software_Logo.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("JetBrains Mono Light", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(153, 0, 204));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("EDUSYS");
 
-        jMenu1.setText("Hệ Thống");
+        jMenu1.setText("System");
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Exit.png"))); // NOI18N
-        jMenuItem2.setText("Đăng Xuất");
+        jMenuItem2.setText("LogOut");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -238,7 +244,7 @@ public final class Home extends javax.swing.JFrame {
         jMenu1.add(jSeparator3);
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh.png"))); // NOI18N
-        jMenuItem3.setText("Đổi Mật Khẩu");
+        jMenuItem3.setText("Change Password");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -249,7 +255,7 @@ public final class Home extends javax.swing.JFrame {
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Stop.png"))); // NOI18N
-        jMenuItem4.setText("Kết Thúc");
+        jMenuItem4.setText("Exit");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -259,7 +265,7 @@ public final class Home extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Quản Lý");
+        jMenu2.setText("Managing");
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Lists.png"))); // NOI18N
@@ -314,10 +320,10 @@ public final class Home extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Thống Kê");
+        jMenu3.setText("Statistics");
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Clien list.png"))); // NOI18N
-        jMenuItem9.setText("Người Học Từng Năm");
+        jMenuItem9.setText("Learners Number");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -327,7 +333,7 @@ public final class Home extends javax.swing.JFrame {
         jMenu3.add(jSeparator5);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Card file.png"))); // NOI18N
-        jMenuItem10.setText("Bảng Điểm Khóa...");
+        jMenuItem10.setText("Score Board");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
@@ -336,7 +342,7 @@ public final class Home extends javax.swing.JFrame {
         jMenu3.add(jMenuItem10);
 
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Bar chart.png"))); // NOI18N
-        jMenuItem11.setText("Điểm Từng Khóa Học");
+        jMenuItem11.setText("Subjects Score");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
@@ -346,7 +352,7 @@ public final class Home extends javax.swing.JFrame {
         jMenu3.add(jSeparator6);
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Dollar.png"))); // NOI18N
-        jMenuItem12.setText("Doanh Thu Từng Chuyên Đề...");
+        jMenuItem12.setText("Revenue");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
@@ -356,14 +362,14 @@ public final class Home extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Trợ Giúp");
+        jMenu4.setText("Help");
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Globe.png"))); // NOI18N
         jMenuItem13.setText("Hướng Dẫn Sử Dụng");
         jMenu4.add(jMenuItem13);
 
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Brick house.png"))); // NOI18N
-        jMenuItem14.setText("Giới Thiệu Sản Phẩm");
+        jMenuItem14.setText("About Us");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);
@@ -509,7 +515,7 @@ public final class Home extends javax.swing.JFrame {
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         openStatistics(3);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -533,12 +539,14 @@ public final class Home extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Home().setVisible(true);
         });
     }
 

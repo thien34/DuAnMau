@@ -2,11 +2,11 @@ package view;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import entity.Employee;
-import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import service.EmployeeService;
 import utils.AuthHelper;
+import utils.ImageHelper;
 import utils.MsgHelper;
 
 public class Login extends javax.swing.JDialog {
@@ -15,24 +15,9 @@ public class Login extends javax.swing.JDialog {
 
     public Login() {
         initComponents();
-        setTitle("Login");
+        setTitle("Login - EDUSYS");
+        setIconImage(ImageHelper.logoApp());
         setLocationRelativeTo(null);
-    }
-
-    void login() {
-        String mamv = txtUser.getText();
-        String password = new String(txtPassword.getPassword());
-        Employee employee = es.getByID(mamv);
-        if (employee == null) {
-            MsgHelper.alert(this, "Wrong username!");
-        } else if (!password.equals(employee.getPass())) {
-            MsgHelper.alert(this, "Wrong password!");
-        } else {
-            MsgHelper.alert(this, "Logged in successfully!");
-            AuthHelper.USER = employee;
-            this.dispose();
-            new Welcome().setVisible(true);
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -79,9 +64,11 @@ public class Login extends javax.swing.JDialog {
 
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
+        txtUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUser.setText("E01");
         txtUser.setToolTipText("");
         txtUser.setBorder(null);
+        txtUser.setSelectionColor(new java.awt.Color(153, 0, 204));
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
@@ -89,10 +76,12 @@ public class Login extends javax.swing.JDialog {
         });
 
         jSeparator1.setBackground(new java.awt.Color(0, 204, 204));
-        jSeparator1.setForeground(new java.awt.Color(0, 204, 204));
+        jSeparator1.setForeground(new java.awt.Color(153, 0, 204));
 
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.setText("1");
         txtPassword.setBorder(null);
+        txtPassword.setSelectionColor(new java.awt.Color(153, 0, 153));
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -100,7 +89,7 @@ public class Login extends javax.swing.JDialog {
         });
 
         jSeparator2.setBackground(new java.awt.Color(0, 204, 204));
-        jSeparator2.setForeground(new java.awt.Color(0, 204, 204));
+        jSeparator2.setForeground(new java.awt.Color(153, 0, 204));
 
         lblPwdIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPwdIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Unlock.png"))); // NOI18N
@@ -112,8 +101,9 @@ public class Login extends javax.swing.JDialog {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("LOGIN");
 
+        btnExit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnExit.setText("Exit");
-        btnExit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(140, 231, 140)));
+        btnExit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 51, 0), new java.awt.Color(0, 255, 102), new java.awt.Color(102, 0, 255), new java.awt.Color(255, 255, 51)));
         btnExit.setContentAreaFilled(false);
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExit.setFocusPainted(false);
@@ -128,8 +118,9 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
+        btnSignIn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSignIn.setText("Sign in");
-        btnSignIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(140, 231, 140)));
+        btnSignIn.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 0, 255), new java.awt.Color(255, 255, 102)));
         btnSignIn.setContentAreaFilled(false);
         btnSignIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSignIn.setFocusPainted(false);
@@ -248,16 +239,25 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSignInMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignInMousePressed
-        btnSignIn.setOpaque(true);
-        btnSignIn.setBackground(Color.GREEN);
+
     }//GEN-LAST:event_btnSignInMousePressed
 
     private void btnSignInMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignInMouseReleased
-        btnSignIn.setOpaque(false);
     }//GEN-LAST:event_btnSignInMouseReleased
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        login();
+        String IDemployee = txtUser.getText();
+        String password = new String(txtPassword.getPassword());
+        Employee employee = es.getByID(IDemployee);
+        if (employee == null) {
+            MsgHelper.alert(this, "Wrong username!");
+        } else if (!password.equals(employee.getPass())) {
+            MsgHelper.alert(this, "Wrong password!");
+        } else {
+            AuthHelper.USER = employee;
+            this.dispose();
+            new ViewLoad().setVisible(true);
+        }
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void chkShowhideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowhideActionPerformed
@@ -285,13 +285,7 @@ public class Login extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

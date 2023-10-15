@@ -4,12 +4,12 @@ import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Welcome extends javax.swing.JDialog {
+public class ViewLoad extends javax.swing.JDialog {
 
-    public Welcome() {
+    public ViewLoad() {
         initComponents();
-        setLocationRelativeTo(null);
         runLoadingBar();
+        setLocationRelativeTo(null);
     }
 
     private void runLoadingBar() {
@@ -24,7 +24,7 @@ public class Welcome extends javax.swing.JDialog {
                         new Home().setVisible(true);
                     }
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
@@ -131,7 +131,7 @@ public class Welcome extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLoad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         try {
@@ -141,7 +141,7 @@ public class Welcome extends javax.swing.JDialog {
         }
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            new Welcome().setVisible(true);
+            new ViewLoad().setVisible(true);
         });
     }
 

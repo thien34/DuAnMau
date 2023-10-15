@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="H&#x1ec7; Th&#x1ed1;ng"/>
+            <Property name="text" type="java.lang.String" value="System"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
@@ -17,7 +17,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Exit.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng Xu&#x1ea5;t"/>
+                <Property name="text" type="java.lang.String" value="LogOut"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -30,7 +30,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Refresh.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i M&#x1ead;t Kh&#x1ea9;u"/>
+                <Property name="text" type="java.lang.String" value="Change Password"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -46,7 +46,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Stop.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="K&#x1ebf;t Th&#xfa;c"/>
+                <Property name="text" type="java.lang.String" value="Exit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
@@ -56,7 +56,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd;"/>
+            <Property name="text" type="java.lang.String" value="Managing"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
@@ -135,7 +135,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea;"/>
+            <Property name="text" type="java.lang.String" value="Statistics"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
@@ -143,7 +143,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Clien list.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ng&#x1b0;&#x1edd;i H&#x1ecd;c T&#x1eeb;ng N&#x103;m"/>
+                <Property name="text" type="java.lang.String" value="Learners Number"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
@@ -156,7 +156,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Card file.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="B&#x1ea3;ng &#x110;i&#x1ec3;m Kh&#xf3;a..."/>
+                <Property name="text" type="java.lang.String" value="Score Board"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
@@ -167,7 +167,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Bar chart.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec3;m T&#x1eeb;ng Kh&#xf3;a H&#x1ecd;c"/>
+                <Property name="text" type="java.lang.String" value="Subjects Score"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
@@ -180,7 +180,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Dollar.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Doanh Thu T&#x1eeb;ng Chuy&#xea;n &#x110;&#x1ec1;..."/>
+                <Property name="text" type="java.lang.String" value="Revenue"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem12ActionPerformed"/>
@@ -190,7 +190,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tr&#x1ee3; Gi&#xfa;p"/>
+            <Property name="text" type="java.lang.String" value="Help"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
@@ -206,7 +206,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Brick house.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gi&#x1edb;i Thi&#x1ec7;u S&#x1ea3;n Ph&#x1ea9;m"/>
+                <Property name="text" type="java.lang.String" value="About Us"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
@@ -423,7 +423,6 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/image/Alarm.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1ed3;ng H&#x1ed3;"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -440,6 +439,9 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="JetBrains Mono Light" size="36" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="0" red="99" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="EDUSYS"/>

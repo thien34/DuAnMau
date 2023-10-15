@@ -33,7 +33,7 @@ public class AboutJApp extends javax.swing.JDialog {
         txtAbout.setEditable(false);
         txtAbout.setColumns(20);
         txtAbout.setRows(5);
-        txtAbout.setText("Copyright © 2007 Free Software Foundation, Inc\n\nThis is the System Managing Application owned by FPTri Software and developed\nby Duy Khanh as a service.\n\nEveryone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.The \nGNU General Public License is a free, copyleft license for software and other kinds of works. you can use, distribute, upload,\nor share this application with no charging fees. Changing and redistribute this application is prohibited.\n\nBest regard, Duy Khanh.\n\n");
+        txtAbout.setText("Copyright © 2004 Free Software Foundation, Inc\n\nThis is the System Managing Application owned by FP Software and developed\nby Duy Khanh as a service.\n\nEveryone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.The \nGNU General Public License is a free, copyleft license for software and other kinds of works. you can use, distribute, upload,\nor share this application with no charging fees. Changing and redistribute this application is prohibited.\n\nBest regard, Duy Khanh.\n\n");
         txtAbout.setAutoscrolls(false);
         txtAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtAbout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
