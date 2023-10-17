@@ -66,10 +66,6 @@ CREATE TABLE Student
     IDLearner NVARCHAR(10) FOREIGN KEY REFERENCES Learner ON UPDATE CASCADE ON DELETE CASCADE,
     Point     FLOAT DEFAULT -1,
 );
-DELETE Student
-Where 1 = 1
-Select *
-From Course
 -- ------------------------------------------------------------
 Create proc sp_ThongKeNguoiHoc AS
 Select YEAR(Registration) Nam,
@@ -79,7 +75,6 @@ Select YEAR(Registration) Nam,
 From Learner
 GROUP By YEAR(Registration)
 GO;
-Exec sp_ThongKeNguoiHoc
 -- * * **  ** * * * * * * * *  * * * * * * **  ** **
 Create proc sp_BangDiem(@IDCourse INT) AS
 Select L.ID MaNH, L.Name HoTen, S.Point Diem
@@ -116,17 +111,12 @@ Where YEAR(C.OpeningDay) = @Year
 Group By T.ThematicName
 GO;
 -- ------------------------------------------------------------
-SELECT *
-FROM Employee
 Insert Employee(ID, Pass, Name, Role)
 Values ('E01', '1', 'Sếp Khánh', 1),
        ('E02', '1', 'Nhân viên Hà', 0),
        ('E03', '1', 'Nhân viên Trang', 0),
        ('E04', '1', 'Nhân viên Thảo', 0)
 
------------------------------------------------------------
-Select *
-From Course
 -------------------------------------------------------
 -- Drop Trigger Delete_Thematic_Course
 --     ON Thematic
