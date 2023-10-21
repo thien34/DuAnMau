@@ -19,7 +19,7 @@ public class ImageHelper {
     }
 
     public static void saveLogo(File file) {
-        File dir = new File("img", file.getName());
+        File dir = new File("src/image", file.getName());
         // Tạo thư mục nếu chưa tồn tại 
         if (!dir.exists()) {
             dir.mkdirs();
@@ -35,7 +35,7 @@ public class ImageHelper {
     }
 
     public static ImageIcon readLogo(String fileName) {
-        File path = new File("img", fileName);
+        File path = new File("src/image", fileName);
         return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(207, 313, Image.SCALE_DEFAULT));
     }
 }
